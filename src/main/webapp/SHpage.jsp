@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,19 +45,72 @@
 	<div class="mainpage">
 		<div class="SH-text">순헌관B1F 11:30 ~ 14:00 | 식권구매 </div>
 		<div class="divider3"></div>
+		<%
+			Connection myConn = null; 
+			ResultSet rs = null;
+			PreparedStatement pstmt = null;
+			String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
+			String user="db2012133"; 
+			String passwd="ss2";
+			String dbdriver = "oracle.jdbc.driver.OracleDriver";
+            ArrayList<String> koreanMenu = new ArrayList<>();
+            ArrayList<String> westernMenu = new ArrayList<>();
+            
+            try {
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                myConn = DriverManager.getConnection(dburl, user, passwd);
+
+                String sql = "SELECT menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8 FROM SHmenu WHERE 날짜 = ? AND 메뉴카테고리 = ?";
+                pstmt = myConn.prepareStatement(sql);
+             	// Fetch Korean menu
+                pstmt.setString(1, "2024-05-30");
+                pstmt.setString(2, "한식");
+                rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    koreanMenu.add(rs.getString("menu1"));
+                    koreanMenu.add(rs.getString("menu2"));
+                    koreanMenu.add(rs.getString("menu3"));
+                    koreanMenu.add(rs.getString("menu4"));
+                    koreanMenu.add(rs.getString("menu5"));
+                    koreanMenu.add(rs.getString("menu6"));
+                    koreanMenu.add(rs.getString("menu7"));
+                    koreanMenu.add(rs.getString("menu8"));
+                }
+                rs.close();
+                pstmt.close();
+                
+             	// Fetch Western menu
+                pstmt = myConn.prepareStatement(sql);
+                pstmt.setString(1, "2024-05-30");
+                pstmt.setString(2, "양식");
+                rs = pstmt.executeQuery();
+                if (rs.next()) {
+                    westernMenu.add(rs.getString("menu1"));
+                    westernMenu.add(rs.getString("menu2"));
+                    westernMenu.add(rs.getString("menu3"));
+                    westernMenu.add(rs.getString("menu4"));
+                    westernMenu.add(rs.getString("menu5"));
+                    westernMenu.add(rs.getString("menu6"));
+                    westernMenu.add(rs.getString("menu7"));
+                    westernMenu.add(rs.getString("menu8"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
+                if (pstmt != null) try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); }
+                if (myConn != null) try { myConn.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
+        %>
 		<span class="buttoncontainer">
 			<button class="SHmenu1">
 				<div>
 				<div class="menu-items">
-		            <p>모듬햄부대찌개</p>
-		            <p>잡곡밥</p>
-		            <p>밥 곽밥</p>
-		            <p>생선커틀렛</p>
-		            <p>야채스크램블에그</p>
-		            <p>오이생채</p>
-		            <p>깍두기</p>
-		            <p>그린샐러드</p>
-		            <p>숭늉*현미밥</p>
+		            <% 
+                            for (String menuItem : koreanMenu) {
+                                out.println("<p>" + menuItem + "</p>");
+                            }
+                        %>
 		        </div>
 		        <hr>
 		        <div class="footer">
@@ -69,15 +124,11 @@
 			<button class="SHmenu2">
 				<div>
 				<div class="menu-items">
-		            <p>모듬햄부대찌개</p>
-		            <p>잡곡밥</p>
-		            <p>밥 곽밥</p>
-		            <p>생선커틀렛</p>
-		            <p>야채스크램블에그</p>
-		            <p>오이생채</p>
-		            <p>깍두기</p>
-		            <p>그린샐러드</p>
-		            <p>숭늉*현미밥</p>
+		            <% 
+                            for (String menuItem : westernMenu) {
+                                out.println("<p>" + menuItem + "</p>");
+                            }
+                        %>
 		        </div>
 		        <hr>
 		        <div class="footer">
