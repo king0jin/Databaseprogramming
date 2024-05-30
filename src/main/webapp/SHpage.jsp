@@ -49,18 +49,28 @@
 			Connection myConn = null; 
 			ResultSet rs = null;
 			PreparedStatement pstmt = null;
+			Statement stmt = null;
 			String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
 			String user="db2012133"; 
 			String passwd="ss2";
 			String dbdriver = "oracle.jdbc.driver.OracleDriver";
             ArrayList<String> koreanMenu = new ArrayList<>();
             ArrayList<String> westernMenu = new ArrayList<>();
+            try{
+            	Class.forName(dbdriver);
+            	myConn = DriverManager.getConnection(dburl, user, passwd);
+            	stmt = myConn.createStatement();
+            }catch(ClassNotFoundException e){
+            	System.out.println("jdbc driver 로딩 실패");
+           	}catch(SQLException e){
+            	System.out.println("오라클 연결 실패");
+            }
             
             try {
                 Class.forName("oracle.jdbc.driver.OracleDriver");
                 myConn = DriverManager.getConnection(dburl, user, passwd);
 
-                String sql = "SELECT menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8 FROM SHmenu WHERE 날짜 = ? AND 메뉴카테고리 = ?";
+                String sql = "SELECT menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8 FROM SHmenu WHERE today = ? AND menucategorie = ?";
                 pstmt = myConn.prepareStatement(sql);
              	// Fetch Korean menu
                 pstmt.setString(1, "2024-05-30");
@@ -97,10 +107,19 @@
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                if (rs != null) try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-                if (pstmt != null) try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-                if (myConn != null) try { myConn.close(); } catch (SQLException e) { e.printStackTrace(); }
+                if (rs != null) try { rs.close(); } catch (SQLException e) {
+                	e.printStackTrace();
+                }if (pstmt != null) try { pstmt.close(); } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                if (stmt != null) try { stmt.close(); } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                if (myConn != null) try { myConn.close(); } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
+                
         %>
 		<span class="buttoncontainer">
 			<button class="SHmenu1">
