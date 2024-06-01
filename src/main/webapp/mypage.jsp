@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="CSS/header1.css">
 <title>마이페이지</title>
 </head>
 
@@ -98,7 +99,38 @@
 </style>
 
 <body>
-<%@include file="bar.jsp"%>
+<header class="header">
+		<div class="topheader">
+			<div class="logocontainer">
+				<div class="logo">
+					<img src="img/KakaoTalk_20240528_133042390.png" alt="titleLogo" />
+            		<div class="logo-text"><a href="home_page.jsp">숙명식당</a></div>
+				</div>
+        	</div>
+        	<div class="topheadermenu">
+        		<ul class="mypage_cart">
+					<li><a href="mypage.jsp">마이페이지</a></li>
+					<li class="separator"></li>
+					<img class="cartlogo" src="img/cart.png" alt="장바구니로고"/>
+            		<li><a href="cart.jsp">장바구니</a></li>
+        		</ul>
+        		<hr/>
+        	</div>
+      	</div>
+      	<div class="divider1"></div>
+      	<ul class="mainmenu">
+        	<li><a href="myeongshin.jsp">명신관</a></li>
+        	<li><a href="#SH_page">순헌관</a></li>
+        	<li><a href="#THEBAKE_page">더베이크</a></li>
+        	<li><a href="#BOARD_page">게시판</a></li>
+      	</ul>
+	</header>
+		
+	<div class="smimg">
+		<img src="img/숙명여대이미지.png">
+	</div>
+	
+	<div class="divider2"></div>
 <table width="100%" align="center" height="100%">
 
 <!-- 프로파일 부분 -->
@@ -108,8 +140,8 @@
 		<img src = "img/profile.png" alt="프로필 사진">
 			<div class = "profileInfo">
 				<p><strong>userID(ex. songsong_123)</strong></p>
-				<button>정보수정</button>
-				<button>로그아웃</button>
+				<button class="change">정보수정</button>
+				<button class="logout">로그아웃</button>
 			</div>
 	</div>
 </div>
