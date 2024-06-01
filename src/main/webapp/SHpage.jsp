@@ -195,6 +195,50 @@
 	            <button onclick="closeModal('westernMealModal')" class="add-to-cart">닫기</button>
           		  
             </div>
+            <script>
+				function addToBasket(mealType) {
+				    let quantity, menu;
+				    const userId = 2012133; // 실제 로그인된 사용자의 user_id로 대체
+				    const today = new Date().toISOString().slice(0, 10); // 실제 오늘 날짜로 대체
+				    const cafeteria = 1; // 실제 cafeteria 값으로 대체
+				
+				    if (mealType === '한식') {
+				        quantity = document.getElementById('koreanQuantity').value;
+				        menu = '한식'; // 실제 메뉴 이름으로 대체
+				        
+				    } else if (mealType === '양식') {
+				        quantity = document.getElementById('WesternQuantity').value;
+				        menu = '양식'; // 실제 메뉴 이름으로 대체
+				        
+				    }
+				    
+				    const price = unitPrice * quantity;
+				
+				    fetch('/addToBasket', {
+				        method: 'POST',
+				        headers: {
+				            'Content-Type': 'application/json'
+				        },
+				        body: JSON.stringify({
+				            user_id: userId,
+				            today: today,
+				            cafeteria: cafeteria,
+				            menu: menu,
+				            price: price,
+				            cnt: quantity
+				        })
+				    }).then(response => {
+				        if (response.ok) {
+				            alert('장바구니에 추가되었습니다.');
+				        } else {
+				            alert('장바구니 추가에 실패했습니다.');
+				        }
+				    });
+				}
+				function closeModal(modalId) {
+		            document.getElementById(modalId).style.display = 'none';
+		        }
+			</script>
 	<script src="javascript/SHpage.js"></script>
 	<script src="javascript/SHmodal.js"></script>
 </body>
