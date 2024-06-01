@@ -25,7 +25,7 @@ public class BasketServlet extends HttpServlet{
         int price = unitPrice * cnt;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@your_database_url:1521:xe", "your_username", "your_password");
+            Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "db2012133", "ss2");
 
             String sql = "INSERT INTO basket (user_id, today, cafeteria, menu, price, cnt) VALUES (?, TO_DATE(?, 'YYYY-MM-DD'), ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
