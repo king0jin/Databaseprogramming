@@ -26,7 +26,6 @@
             <a href="myeongshin.jsp">명신관</a>
             <a href="sunheon.jsp">순헌관</a>
             <a href="thebake.jsp">더베이크</a>
-            <a href="board.jsp">게시판</a>
         </nav>
         <hr>
       <div class="main-banner">

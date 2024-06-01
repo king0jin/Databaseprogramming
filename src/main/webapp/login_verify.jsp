@@ -38,7 +38,7 @@
 	
 	if (isValidUser) {
 	    session.setAttribute("user", userID);
-	    response.sendRedirect("main.jsp");
+	    response.sendRedirect("home_page.jsp");
 	} else {
 	    
 	    response.sendRedirect("login_page.jsp?error=true");

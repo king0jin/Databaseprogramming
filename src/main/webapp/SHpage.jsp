@@ -30,10 +30,9 @@
       	</div>
       	<div class="divider1"></div>
       	<ul class="mainmenu">
-        	<li><a href="myeongshin.jsp">명신관</a></li>
-        	<li><a href="#SH_page">순헌관</a></li>
-        	<li><a href="#THEBAKE_page">더베이크</a></li>
-        	<li><a href="#BOARD_page">게시판</a></li>
+        	<li><a href="MSpage.jsp">명신관</a></li>
+        	<li><a href="SHpage.jsp">순헌관</a></li>
+        	<li><a href="thebake.jsp">더베이크</a></li>
       	</ul>
 	</header>
 		
@@ -124,37 +123,42 @@
 		<span class="buttoncontainer">
 			<button class="SHmenu1">
 				<div>
-				<div class="menu-items">
-		            <% 
-                            for (String menuItem : koreanMenu) {
-                                out.println("<p>" + menuItem + "</p>");
-                            }
-                        %>
-		        </div>
-		        <hr>
-		        <div class="footer">
-            <div class="category">한식</div>
-            <br>
-            <p class="price">6,500원</p>
-            
-        </div>
+					<div class="menu-items">
+			            <% 
+	                       for (String menuItem : koreanMenu) {
+	                       		out.println("<p>" + menuItem + "</p>");
+	                       }
+	                    %>
+			        </div>
+			        <hr>
+			        <div class="footer">
+			            <div class="category">한식</div>
+			            <p class="price">6,500원</p>
+	        		</div>
+			        <div class="menu-item-add">
+					    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
+					    <span class="menu-item-add-text">담기</span>
+					</div>
 				</div>
 			</button>
 			<button class="SHmenu2">
 				<div>
-				<div class="menu-items">
-		            <% 
-                            for (String menuItem : westernMenu) {
-                                out.println("<p>" + menuItem + "</p>");
-                            }
-                        %>
-		        </div>
-		        <hr>
-		        <div class="footer">
-            <div class="category">양식</div>
-            <p class="price">6,500원</p>
-            
-        </div>
+					<div class="menu-items">
+			            <% 
+	                       for (String menuItem : westernMenu) {
+	                       		out.println("<p>" + menuItem + "</p>");
+	                       }
+	                     %>
+			        </div>
+		        	<hr>
+			        <div class="footer">
+			            <div class="category">양식</div>
+			            <p class="price">6,500원</p>
+	        		</div>
+			        <div class="menu-item-add">
+					    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
+					    <span class="menu-item-add-text">담기</span>
+					</div>
 				</div>
 			</button>
 		</span>
@@ -167,9 +171,9 @@
 	            <p>한식 식권</p>
 	        </div>
 	        <div class="quantity">
-                    <label for="koreanQuantity">수량 :</label>
-                    <input type="number" id="koreanQuantity" name="quantity" value="1" min="1">
-                </div>
+                <label for="koreanQuantity">수량 :</label>
+                <input type="number" id="koreanQuantity" name="quantity" value="1" min="0" max="5">
+            </div>
                 
                 <button id="addToCartKorean" class="add-to-cart">장바구니</button>
                 <button onclick="closeModal('koreanMealModal')" class="add-to-cart">닫기</button>
@@ -183,9 +187,9 @@
 	            <p>양식 식권</p>
 	        </div>
 	        <div class="quantity">
-                    <label for="WesternQuantity">수량 :</label>
-                    <input type="number" id="WesternQuantity" name="quantity" value="1" min="1">
-                </div>
+                <label for="WesternQuantity">수량 :</label>
+                <input type="number" id="WesternQuantity" name="quantity" value="1" min="0" max="5">
+            </div>
                 
 	            <button id="addToCartWestern" class="add-to-cart">장바구니</button>
 	            <button onclick="closeModal('westernMealModal')" class="add-to-cart">닫기</button>
