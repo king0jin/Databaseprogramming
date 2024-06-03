@@ -39,3 +39,4 @@ function removeFromBasket() {
 function updateBasketCount() {
     // HTML 요소에 현재 장바구니 행의 갯수를 표시
     document.getElementById('basketCount').innerText = basketRowCount;
+}
