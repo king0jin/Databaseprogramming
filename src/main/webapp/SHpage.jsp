@@ -23,7 +23,7 @@
 					<li><a href="mypage.jsp">마이페이지</a></li>
 					<li class="separator"></li>
 					<img class="cartlogo" src="img/cart.png" alt="장바구니로고"/>
-            		<li><a href="cart.jsp">장바구니</a><span id="basketCount">0</span></li>
+            		<li><a href="cart.jsp">장바구니</a><span id="basketCount">0</span></li> 
         		</ul>
         		<hr/>
         	</div>
@@ -194,51 +194,7 @@
 	            <button id="addToCartWestern" class="add-to-cart">장바구니</button>
 	            <button onclick="closeModal('westernMealModal')" class="add-to-cart">닫기</button>
           		  
-            </div>
-            <script>
-				function addToBasket(mealType) {
-				    let quantity, menu;
-				    const userId = 2012133; // 실제 로그인된 사용자의 user_id로 대체
-				    const today = 2024/05/30; // 실제 오늘 날짜로 대체
-				    const cafeteria = 1; // 실제 cafeteria 값으로 대체
-				
-				    if (mealType === '한식') {
-				        quantity = document.getElementById('koreanQuantity').value;
-				        menu = '한식'; // 실제 메뉴 이름으로 대체
-				        
-				    } else if (mealType === '양식') {
-				        quantity = document.getElementById('WesternQuantity').value;
-				        menu = '양식'; // 실제 메뉴 이름으로 대체
-				        
-				    }
-				    
-				    const price = unitPrice * quantity;
-				
-				    fetch('/addToBasket', {
-				        method: 'POST',
-				        headers: {
-				            'Content-Type': 'application/json'
-				        },
-				        body: JSON.stringify({
-				            user_id: userId,
-				            today: today,
-				            cafeteria: cafeteria,
-				            menu: menu,
-				            price: price,
-				            cnt: quantity
-				        })
-				    }).then(response => {
-				        if (response.ok) {
-				            alert('장바구니에 추가되었습니다.');
-				        } else {
-				            alert('장바구니 추가에 실패했습니다.');
-				        }
-				    });
-				}
-				function closeModal(modalId) {
-		            document.getElementById(modalId).style.display = 'none';
-		        }
-			</script>
+        </div>
 	<script src="javascript/SHpage.js"></script>
 	<script src="javascript/SHmodal.js"></script>
 </body>
