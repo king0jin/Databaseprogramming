@@ -23,7 +23,7 @@
 					<li><a href="mypage.jsp">마이페이지</a></li>
 					<li class="separator"></li>
 					<img class="cartlogo" src="img/cart.png" alt="장바구니로고"/>
-            		<li><a href="cart.jsp">장바구니</a></li>
+            		<li><a href="cart.jsp">장바구니</a><span id="basketCount">0</span></li>
         		</ul>
         		<hr/>
         	</div>
@@ -172,7 +172,7 @@
 	        </div>
 	        <div class="quantity">
                 <label for="koreanQuantity">수량 :</label>
-                <input type="number" id="koreanQuantity" name="quantity" value="1" min="0" max="5">
+                <input type="number" id="koreanQuantity" name="quantity" value="0" min="0" max="5">
             </div>
                 
                 <button id="addToCartKorean" class="add-to-cart">장바구니</button>
@@ -188,7 +188,7 @@
 	        </div>
 	        <div class="quantity">
                 <label for="WesternQuantity">수량 :</label>
-                <input type="number" id="WesternQuantity" name="quantity" value="1" min="0" max="5">
+                <input type="number" id="WesternQuantity" name="quantity" value="0" min="0" max="5">
             </div>
                 
 	            <button id="addToCartWestern" class="add-to-cart">장바구니</button>
@@ -199,7 +199,7 @@
 				function addToBasket(mealType) {
 				    let quantity, menu;
 				    const userId = 2012133; // 실제 로그인된 사용자의 user_id로 대체
-				    const today = new Date().toISOString().slice(0, 10); // 실제 오늘 날짜로 대체
+				    const today = 2024/05/30; // 실제 오늘 날짜로 대체
 				    const cafeteria = 1; // 실제 cafeteria 값으로 대체
 				
 				    if (mealType === '한식') {
