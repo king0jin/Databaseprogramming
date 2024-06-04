@@ -23,7 +23,7 @@
 					<li><a href="mypage.jsp">마이페이지</a></li>
 					<li class="separator"></li>
 					<img class="cartlogo" src="img/cart.png" alt="장바구니로고"/>
-            		<li><a href="cart.jsp">장바구니</a><span id="basketCount">0</span></li> 
+            		<li><a href="cart.jsp">장바구니</a></li> 
         		</ul>
         		<hr/>
         	</div>
