@@ -45,13 +45,13 @@
 </head>
 <body>
 <div class="mainpage">
-    <div class="category">
-        <div class="menu-item selected" id="cupbab" onclick="selectMenu('cupbab')"><a href="MSpage.jsp"></a>컵밥</div>
-        <div class="menu-item" id="western" onclick="selectMenu('western')"><a href="MSpageWestern.jsp"></a>양식</div>
-        <div class="menu-item" id="special" onclick="selectMenu('special')"><a href="MSpageSpecial.jsp"></a>스페셜메뉴</div>
-    </div>
+    <ul class="category">
+        <li class="menu-item" id="cupbab" onclick="selectMenu('cupbab')"><a href="MSpage.jsp">컵밥</a></li>
+        <li class="menu-item selected" id="western" onclick="selectMenu('western')"><a href="MSpageWestern.jsp">양식</a></li>
+        <li class="menu-item" id="special" onclick="selectMenu('special')"><a href="MSpageSpecial.jsp">스페셜메뉴</a></li>
+    </ul>
     <div class="menu-container" id="menu-container">
-        <div class="menu-item-card">
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image1.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -62,8 +62,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image2.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -74,8 +74,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image3.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -86,8 +86,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image4.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -98,8 +98,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image5.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -110,8 +110,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image6.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -122,8 +122,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -134,8 +134,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -146,8 +146,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -158,8 +158,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -170,8 +170,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -182,8 +182,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -194,8 +194,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -206,8 +206,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -218,8 +218,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -230,8 +230,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -242,8 +242,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -254,8 +254,8 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
-        <div class="menu-item-card">
+        </button>
+        <button class="menu-item-card">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -266,7 +266,7 @@
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
-        </div>
+        </button>
     </div>
 </div>
 
