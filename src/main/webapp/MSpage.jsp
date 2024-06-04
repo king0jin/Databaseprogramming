@@ -46,9 +46,9 @@
 <body>
 <div class="mainpage">
     <div class="category">
-        <div class="menu-item selected" id="cupbab" onclick="selectMenu('cupbab')">컵밥</div>
-        <div class="menu-item" id="western" onclick="selectMenu('western')">양식</div>
-        <div class="menu-item" id="special" onclick="selectMenu('special')">스페셜메뉴</div>
+        <div class="menu-item selected" id="cupbab" onclick="selectMenu('cupbab')"><a href="MSpage.jsp"></a>컵밥</div>
+        <div class="menu-item" id="western" onclick="selectMenu('western')"><a href="MSpageWestern.jsp"></a>양식</div>
+        <div class="menu-item" id="special" onclick="selectMenu('special')"><a href="MSpageSpecial.jsp"></a>스페셜메뉴</div>
     </div>
     <div class="menu-container" id="menu-container">
         <div class="menu-item-card">
@@ -91,8 +91,8 @@
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image4.png');"></div>
                 <div class="menu-item-divider"></div>
-                <div class="menu-item-name">스파게티</div>
-                <div class="menu-item-price">6,000원</div>
+                <div class="menu-item-name">순두부컵밥</div>
+                <div class="menu-item-price">3,800원</div>
                 <div class="menu-item-add-container">
                     <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
                     <div class="menu-item-add-text">담기</div>
@@ -103,8 +103,8 @@
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image5.png');"></div>
                 <div class="menu-item-divider"></div>
-                <div class="menu-item-name">리조또</div>
-                <div class="menu-item-price">7,000원</div>
+                <div class="menu-item-name">제육컵밥</div>
+                <div class="menu-item-price">5,500원</div>
                 <div class="menu-item-add-container">
                     <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
                     <div class="menu-item-add-text">담기</div>
@@ -115,8 +115,8 @@
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image6.png');"></div>
                 <div class="menu-item-divider"></div>
-                <div class="menu-item-name">스페셜 메뉴 1</div>
-                <div class="menu-item-price">8,000원</div>
+                <div class="menu-item-name">치킨마요덮밥</div>
+                <div class="menu-item-price">4,900원</div>
                 <div class="menu-item-add-container">
                     <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
                     <div class="menu-item-add-text">담기</div>
@@ -127,8 +127,8 @@
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
-                <div class="menu-item-name">스페셜 메뉴 2</div>
-                <div class="menu-item-price">9,000원</div>
+                <div class="menu-item-name">스팸마요덮밥</div>
+                <div class="menu-item-price">4,900원</div>
                 <div class="menu-item-add-container">
                     <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
                     <div class="menu-item-add-text">담기</div>

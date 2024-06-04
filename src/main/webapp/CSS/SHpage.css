@@ -76,8 +76,9 @@
     margin: 0 10px;
 }
 #basketCount {
-	padding-left: 5px;
+	padding-left: 3px;
 	background-color:#4F709C;
+	color: white;
 }
 .divider1 {
   width: 100%;
