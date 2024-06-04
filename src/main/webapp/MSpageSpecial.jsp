@@ -51,7 +51,7 @@
         <li class="menu-item selected" id="special" onclick="selectMenu('special')"><a href="MSpageSpecial.jsp">스페셜메뉴</a></li>
     </ul>
     <div class="menu-container" id="menu-container">
-        <button class="menu-item-card">
+        <button class="menu-item-card1">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image1.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </button>
-        <button class="menu-item-card">
+        <button class="menu-item-card2">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image2.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -77,6 +77,32 @@
         </button>
     </div>
 </div>
+		<div id="special1" class="modal">
+	        <div class="modal-content">
+	            <span class="close" onclick="closeModal('special1')">&times;</span>
+	            <p>순두부찌개</p>
+	        </div>
+	        <div class="quantity">
+                <label for="special1Quantity">수량 :</label>
+                <input type="number" id="special1Quantity" name="quantity" value="0" min="0" max="5">
+            </div>   
+                <button id="addToCartspecial1" class="add-to-cart">장바구니</button>
+                <button onclick="closeModal('special1')" class="add-to-cart">닫기</button>	
+         </div>
+         <div id="special2" class="modal">
+	        <div class="modal-content">
+	            <span class="close" onclick="closeModal('special2')">&times;</span>
+	            <p>6월 6일 현충일</p>
+	        </div>
+	        <div class="quantity">
+                <label for="special2Quantity">수량 :</label>
+                <input type="number" id="special2Quantity" name="quantity" value="0" min="0" max="0">
+            </div>
+                <button id="addToCartspecial2" class="add-to-cart">장바구니</button>
+                <button onclick="closeModal('special2')" class="add-to-cart">닫기</button>	
+         </div>
+         <script src="javascript/MSpageSpecial.js"></script>
+		 <script src="javascript/MSpageSpecialmodal.js"></script>
 
 <script>
     function selectMenu(category) {

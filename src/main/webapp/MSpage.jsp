@@ -51,7 +51,7 @@
         <li class="menu-item" id="special" onclick="selectMenu('special')"><a href="MSpageSpecial.jsp">스페셜메뉴</a></li>
     </ul>
     <div class="menu-container" id="menu-container">
-        <button class="menu-item-card">
+        <button class="menu-item-card1">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image1.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -63,7 +63,7 @@
                 </div>
             </div>
         </button>
-        <button class="menu-item-card">
+        <button class="menu-item-card2">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image2.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -75,7 +75,7 @@
                 </div>
             </div>
         </button>
-        <button class="menu-item-card">
+        <button class="menu-item-card3">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image3.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -87,7 +87,7 @@
                 </div>
             </div>
         </button>
-        <button class="menu-item-card">
+        <button class="menu-item-card4">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image4.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </button>
-        <button class="menu-item-card">
+        <button class="menu-item-card5">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image5.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -111,7 +111,7 @@
                 </div>
             </div>
         </button>
-        <button class="menu-item-card">
+        <button class="menu-item-card6">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image6.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -123,7 +123,7 @@
                 </div>
             </div>
         </button>
-        <button class="menu-item-card">
+        <button class="menu-item-card7">
             <div class="menu-item-background">
                 <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
                 <div class="menu-item-divider"></div>
@@ -137,6 +137,93 @@
         </button>
     </div>
 </div>
+
+		<div id="cubbab1" class="modal">
+	        <div class="modal-content">
+	            <span class="close" onclick="closeModal('cubbab1')">&times;</span>
+	            <p>비건야채겁밥</p>
+	        </div>
+	        <div class="quantity">
+                <label for="cubbab1Quantity">수량 :</label>
+                <input type="number" id="cubbab1Quantity" name="quantity" value="0" min="0" max="5">
+            </div>   
+                <button id="addToCartcubbab1" class="add-to-cart">장바구니</button>
+                <button onclick="closeModal('cubbab1')" class="add-to-cart">닫기</button>	
+         </div>
+         <div id="cubbab2" class="modal">
+	        <div class="modal-content">
+	            <span class="close" onclick="closeModal('cubbab2')">&times;</span>
+	            <p>참치마요컵밥</p>
+	        </div>
+	        <div class="quantity">
+                <label for="cubbab2Quantity">수량 :</label>
+                <input type="number" id="cubbab2Quantity" name="quantity" value="0" min="0" max="5">
+            </div>
+                <button id="addToCartcubbab2" class="add-to-cart">장바구니</button>
+                <button onclick="closeModal('cubbab2')" class="add-to-cart">닫기</button>	
+         </div>
+         <div id="cubbab3" class="modal">
+	        <div class="modal-content">
+	            <span class="close" onclick="closeModal('cubbab3')">&times;</span>
+	            <p>참치김치컵밥</p>
+	        </div>
+	        <div class="quantity">
+                <label for="cubbab3Quantity">수량 :</label>
+                <input type="number" id="cubbab3Quantity" name="quantity" value="0" min="0" max="5">
+            </div>               
+                <button id="addToCartcubbab3" class="add-to-cart">장바구니</button>
+                <button onclick="closeModal('cubbab3')" class="add-to-cart">닫기</button>
+         </div>
+         <div id="cubbab4" class="modal">
+	        <div class="modal-content">
+	            <span class="close" onclick="closeModal('cubbab4')">&times;</span>
+	            <p>순두부컵밥</p>
+	        </div>
+	        <div class="quantity">
+                <label for="cubbab4Quantity">수량 :</label>
+                <input type="number" id="cubbab4Quantity" name="quantity" value="0" min="0" max="5">
+            </div>               
+                <button id="addToCartcubbab4" class="add-to-cart">장바구니</button>
+                <button onclick="closeModal('cubbab4')" class="add-to-cart">닫기</button>
+         </div>
+         <div id="cubbab5" class="modal">
+	        <div class="modal-content">
+	            <span class="close" onclick="closeModal('cubbab5')">&times;</span>
+	            <p>제육컵밥</p>
+	        </div>
+	        <div class="quantity">
+                <label for="cubbab5Quantity">수량 :</label>
+                <input type="number" id="cubbab5Quantity" name="quantity" value="0" min="0" max="5">
+            </div>   
+                <button id="addToCartcubbab1" class="add-to-cart">장바구니</button>
+                <button onclick="closeModal('cubbab5')" class="add-to-cart">닫기</button>	
+         </div>
+         <div id="cubbab6" class="modal">
+	        <div class="modal-content">
+	            <span class="close" onclick="closeModal('cubbab6')">&times;</span>
+	            <p>치킨마요컵밥</p>
+	        </div>
+	        <div class="quantity">
+                <label for="cubbab6Quantity">수량 :</label>
+                <input type="number" id="cubbab6Quantity" name="quantity" value="0" min="0" max="5">
+            </div>   
+                <button id="addToCartcubbab6" class="add-to-cart">장바구니</button>
+                <button onclick="closeModal('cubbab6')" class="add-to-cart">닫기</button>	
+         </div>
+         <div id="cubbab7" class="modal">
+	        <div class="modal-content">
+	            <span class="close" onclick="closeModal('cubbab7')">&times;</span>
+	            <p>스팸마요컵밥</p>
+	        </div>
+	        <div class="quantity">
+                <label for="cubbab7Quantity">수량 :</label>
+                <input type="number" id="cubbab7Quantity" name="quantity" value="0" min="0" max="5">
+            </div>   
+                <button id="addToCartcubbab7" class="add-to-cart">장바구니</button>
+                <button onclick="closeModal('cubbab7')" class="add-to-cart">닫기</button>	
+         </div>
+         <script src="javascript/MSpage.js"></script>
+		 <script src="javascript/MSpagemodal.js"></script>
 
 <script>
     function selectMenu(category) {
