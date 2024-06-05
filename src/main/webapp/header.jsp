@@ -30,6 +30,7 @@
         <li><a href="MSpage.jsp" class="${pageContext.request.servletPath == '/MSpage.jsp' ? 'selected' : ''}">명신관</a></li>
         <li><a href="SHpage.jsp">순헌관</a></li>
         <li><a href="THEBAKEpage.jsp">더베이크</a></li>
+        <li><a href="POPULARpage.jsp">인기 메뉴</a></li>
     </ul>
 </header>
 
