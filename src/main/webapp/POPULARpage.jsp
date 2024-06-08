@@ -41,7 +41,7 @@
 <head>
     <meta charset="UTF-8">
     <title>숙명식당 :: 명신관 인기메뉴</title>
-    <link rel="stylesheet" type="text/css" href="CSS/POPULARpage.css">
+    <link rel="stylesheet" type="text/css" href="css/POPULARpage.css">
 </head>
 <body>
 <div class="mainpage">
