@@ -35,7 +35,7 @@
 
     try {
         Class.forName("oracle.jdbc.driver.OracleDriver");
-        conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "db2010452", "raeul2");
+        conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "db2012133", "ss2");
         conn.setAutoCommit(false);
 
         // 모든 메뉴에 대해서 반복문 생성
