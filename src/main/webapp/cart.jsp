@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" import="java.util.*, java.sql.*" %>
-<%@ include file="bar.jsp" %>
+<%@ include file="header.jsp" %>
 <jsp:include page="cartData.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>숙명식당 :: 장바구니</title>
-    <link rel="stylesheet" type="text/css" href="css/cart.css">
+    <link rel="stylesheet" type="text/css" href="css/cart.css?after">
     <style>
         .item-divider {
             border-top: 1px solid #ccc;
