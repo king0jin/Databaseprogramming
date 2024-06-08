@@ -142,9 +142,7 @@
         </form>
         
         <a href="login_page.jsp">이전화면</a> 
-        
-          
-        
+  
 	 </div>
 </body>
 

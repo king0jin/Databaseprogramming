@@ -5,8 +5,8 @@
 <%
 	String dbDriver = "oracle.jdbc.driver.OracleDriver";
 	String dbURL = "jdbc:oracle:thin:@localhost:1521:xe"; // Update with your DB details
-	String dbUser = "dbProject"; // Update with your DB username
-	String dbPasswd = "000828"; // Update with your DB password
+	String dbUser = "db2012133"; // Update with your DB username
+	String dbPasswd = "ss2"; // Update with your DB password
     Connection conn = null;
     Statement stmt = null;
     ResultSet rs = null;

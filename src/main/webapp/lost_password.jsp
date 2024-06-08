@@ -20,7 +20,7 @@
             background-color: #f0f0f0;
            }   
                
-           </style>
+</style>
 <body>
     <div class="lost_password-container">
     <div class="logo-title">

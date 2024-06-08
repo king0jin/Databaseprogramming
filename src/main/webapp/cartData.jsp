@@ -3,8 +3,8 @@
 <%
   String dbDriver = "oracle.jdbc.driver.OracleDriver";
   String dbURL = "jdbc:oracle:thin:@localhost:1521:xe";
-  String dbUser = "dbProject";
-  String dbPasswd = "000828";
+  String dbUser = "db2012133";
+  String dbPasswd = "ss2";
   Connection conn = null;
   CallableStatement cstmt = null;
   ResultSet rs = null;
