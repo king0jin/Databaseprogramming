@@ -6,7 +6,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>회원정보 수정 처리</title>
+    <title>숙명식당 ::회원정보 수정</title>
 </head>
 
 <body>

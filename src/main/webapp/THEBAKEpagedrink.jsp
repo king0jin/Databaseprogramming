@@ -42,7 +42,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>더베이크</title>
+    <title>숙명식당 :: 더베이크 음료/커피</title>
     <link rel="stylesheet" type="text/css" href="css/THEBAKEpage.css">
 </head>
 <style>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>오늘의 메뉴</title>
+<title>숙명식당 :: 메인_오늘의 메뉴</title>
 </head>
 <style>
 	.todayMenu {
@@ -47,17 +47,17 @@
 			</div>
 			<div class="menu-categories">
 				<div class="menu-title">한식</div>
-					<div class="menu-items">
+				<div class="menu-items">
 					<span>모듬햄부대찌개</span>
 					<span>생선커틀렛</span>
-					</div>		
+				</div>		
 			</div>
 			<div class="menu-categories">
 				<div class="menu-title">양식</div>
-					<div class="menu-items">
+				<div class="menu-items">
 					<span>난자완스덮밥</span>
 					<span>멘보샤</span>
-					</div>		
+				</div>		
 			</div>
 		</div>
 	</header>

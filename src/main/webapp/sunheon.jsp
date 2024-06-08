@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>순헌관페이지</title>
+<title>숙명식당 :: 메인_순헌</title>
 </head>
 <style>
 	.stitle {

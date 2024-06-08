@@ -40,7 +40,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>숙명식당 :: POPULAR</title>
+    <title>숙명식당 :: 더베이크 인기메뉴</title>
     <link rel="stylesheet" type="text/css" href="css/POPULARpage.css">
 </head>
 <body>

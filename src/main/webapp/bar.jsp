@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>숙명식당</title>
+    <title>숙명식당 :: 상단바</title>
     <link rel="stylesheet" href="css/barstyle.css"> <!-- 스타일시트 연결 -->
 </head>
 <body>

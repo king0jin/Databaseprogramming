@@ -19,7 +19,6 @@
   int menu_num = Integer.parseInt(menu_num_str);
   int count = Integer.parseInt(count_str);
 
-
   String dbDriver = "oracle.jdbc.driver.OracleDriver";
   String dbURL = "jdbc:oracle:thin:@localhost:1521:xe"; // Update with your DB details
   String dbUser = "db2012133"; // Update with your DB username

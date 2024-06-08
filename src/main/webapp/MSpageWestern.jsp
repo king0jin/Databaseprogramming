@@ -43,36 +43,36 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>명신관</title>
+    <title>숙명식당 :: 명신관 양식</title>
     <link rel="stylesheet" type="text/css" href="css/MSpage.css">
 </head>
 <style>
-.modal {
-	display: none;
-    position: fixed;
-    z-index: 1500; /* 변경된 부분 */
-    top: 50%; /* 수직 중앙 정렬 */
-    left: 40%; /* 수평 중앙 정렬 */  
-    width:300px;  
-    height:400px;  
-	padding:20px;  
-	text-align: center;
-	background-color: rgb(255,255,255); 
-    border-radius:10px; 
-    box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);  
-	transform:translateY(-50%);
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 5px;
-    z-index: 1501;
-}
+	.modal {
+		display: none;
+	    position: fixed;
+	    z-index: 1500; /* 변경된 부분 */
+	    top: 50%; /* 수직 중앙 정렬 */
+	    left: 40%; /* 수평 중앙 정렬 */  
+	    width:300px;  
+	    height:400px;  
+		padding:20px;  
+		text-align: center;
+		background-color: rgb(255,255,255); 
+	    border-radius:10px; 
+	    box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);  
+		transform:translateY(-50%);
+	}
+	
+	.modal-content {
+	    background-color: #fefefe;
+	    margin: 5% auto;
+	    padding: 20px;
+	    border: 1px solid #888;
+	    width: 80%;
+	    max-width: 500px;
+	    border-radius: 5px;
+	    z-index: 1501;
+	}
 </style>
 <body>
 <div class="mainpage">

@@ -5,21 +5,20 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/lost_password_style.css">
-<title>비밀번호 찾기</title>
+<title>숙명식당 :: 비밀번호 찾기</title>
 
 </head>
 <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0;
-           }   
-               
+	html, body {
+		margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+    }              
 </style>
 <body>
     <div class="lost_password-container">
@@ -38,11 +37,7 @@
 	    </label>
 	    </form>
 
-	    
-	    <a href="register.jsp">회원가입/</a><a href="login_page.jsp">로그인</a>
-	     
-	    
-       
+	    <a href="register.jsp">회원가입/</a><a href="login_page.jsp">로그인</a>       
 	</div>
     <script>
         window.onload = function() {

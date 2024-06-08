@@ -39,60 +39,58 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>숙명식당 :: THEBAKE</title>
+    <title>숙명식당 :: 더베이크 케이크</title>
     <link rel="stylesheet" type="text/css" href="CSS/THEBAKEpage.css">
 </head>
 <body>
-<div class="mainpage">
-    <ul class="category">
-        <li class="menu-item" id="bakery" onclick="selectMenu('bakery')"><a href="THEBAKEpage.jsp">베이커리</a></li>
-        <li class="menu-item" id="sand" onclick="selectMenu('sand')"><a href="THEBAKEpagesand.jsp">샌드위치</a></li>
-        <li class="menu-item" id="drink" onclick="selectMenu('drink')"><a href="THEBAKEpagedrink.jsp">커피/음료</a></li>
-        <li class="menu-item selected" id="cake" onclick="selectMenu('cake')"><a href="THEBAKEpagecake.jsp">케이크</a></li>
-    </ul>
-    <div class="menu-container" id="menu-container">
-        <button class="menu-item-card1">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image1.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">브라우니</div>
-                <div class="menu-item-price">4,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-     </div>
-</div>
-		<div id="cake1" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('cake1')">&times;</span>
-	            <p>브라우니</p>
-	        </div>
-	        <div class="quantity">
-                <label for="cake1Quantity">수량 :</label>
-                <input type="number" id="cake1Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartcake1" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('cake1')" class="add-to-cart">닫기</button>	
-         </div>
-        
-         <script src="javascript/THEBAKEpagecake.js"></script>
-		 <script src="javascript/THEBAKEpagecakemodal.js"></script>
-
-<script>
-    function selectMenu(category) {
-        var items = document.getElementsByClassName('menu-item');
-        for (var i = 0; i < items.length; i++) {
-            items[i].classList.remove('selected');
-        }
-        document.getElementById(category).classList.add('selected');
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        selectMenu('cake');
-    });
-</script>
+	<div class="mainpage">
+	    <ul class="category">
+	        <li class="menu-item" id="bakery" onclick="selectMenu('bakery')"><a href="THEBAKEpage.jsp">베이커리</a></li>
+	        <li class="menu-item" id="sand" onclick="selectMenu('sand')"><a href="THEBAKEpagesand.jsp">샌드위치</a></li>
+	        <li class="menu-item" id="drink" onclick="selectMenu('drink')"><a href="THEBAKEpagedrink.jsp">커피/음료</a></li>
+	        <li class="menu-item selected" id="cake" onclick="selectMenu('cake')"><a href="THEBAKEpagecake.jsp">케이크</a></li>
+	    </ul>
+	    <div class="menu-container" id="menu-container">
+	        <button class="menu-item-card1">
+	            <div class="menu-item-background">
+	                <div class="menu-item-image" style="background-image: url('images/image1.png');"></div>
+	                <div class="menu-item-divider"></div>
+	                <div class="menu-item-name">브라우니</div>
+	                <div class="menu-item-price">4,500원</div>
+	                <div class="menu-item-add-container">
+	                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
+	                    <div class="menu-item-add-text">담기</div>
+	                </div>
+	            </div>
+	        </button>
+	     </div>
+	</div>
+	<div id="cake1" class="modal">
+	    <div class="modal-content">
+	        <span class="close" onclick="closeModal('cake1')">&times;</span>
+	        <p>브라우니</p>
+	    </div>
+	    <div class="quantity">
+            <label for="cake1Quantity">수량 :</label>
+            <input type="number" id="cake1Quantity" name="quantity" value="0" min="0" max="5">
+        </div>   
+            <button id="addToCartcake1" class="add-to-cart">장바구니</button>
+            <button onclick="closeModal('cake1')" class="add-to-cart">닫기</button>	
+    </div>
+	<script src="javascript/THEBAKEpagecake.js"></script>
+	<script src="javascript/THEBAKEpagecakemodal.js"></script>
+	<script>
+	    function selectMenu(category) {
+	        var items = document.getElementsByClassName('menu-item');
+	        for (var i = 0; i < items.length; i++) {
+	            items[i].classList.remove('selected');
+	        }
+	        document.getElementById(category).classList.add('selected');
+	    }
+	
+	    document.addEventListener('DOMContentLoaded', function() {
+	        selectMenu('cake');
+	    });
+	</script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>명신관페이지</title>
+<title>숙명식당 :: 메인_명신</title>
 </head>
 <style>
 	.mtitle {

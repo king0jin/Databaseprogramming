@@ -43,7 +43,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>명신관</title>
+    <title>숙명식당 :: 명신관 컵밥</title>
     <link rel="stylesheet" type="text/css" href="css/MSpage.css">
 </head>
 <style>
@@ -132,10 +132,7 @@
         %>
     </div>
 </div>
-
-
 <script>
-
     function selectMenu(category) {
         var items = document.getElementsByClassName('menu-item');
         for (var i = 0; i < items.length; i++) {

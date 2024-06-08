@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="css/SHpage.css">
-<title>숙명식당 :: 순헌관 식권 구매</title>
+<title>숙명식당 :: 순헌관</title>
 </head>
 <body>
 <%@include file="bar.jsp" %>

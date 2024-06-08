@@ -42,7 +42,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>명신관</title>
+    <title>숙명식당 :: 명신관 메뉴 카드</title>
     <link rel="stylesheet" type="text/css" href="CSS/MSpage.css">
 </head>
 <style>

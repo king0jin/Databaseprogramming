@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/register_style.css">
-    <title>숙명식당 회원가입</title>
+    <title>숙명식당 :: 회원가입</title>
     
     <script>
 

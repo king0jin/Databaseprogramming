@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
+<title>숙명식당 :: 마이페이지</title>
 </head>
 
 <style>

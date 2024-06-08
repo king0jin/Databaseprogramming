@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>더베이크페이지</title>
+<title>숙명식당 :: 메인_더베이크</title>
 </head>
 <style>
 	.btitle {

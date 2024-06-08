@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>회원가입 처리</title>
+    <title>숙명식당 :: 회원가입 기능</title>
 </head>
 <body>
 

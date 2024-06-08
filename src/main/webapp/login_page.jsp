@@ -5,7 +5,7 @@
 <head>
     <meta charset="EUC-KR">
     <link rel="stylesheet" type="text/css" href="css/login_page_style.css">
-    <title>숙명식당 로그인</title>
+    <title>숙명식당 :: 로그인</title>
     <script>
     function blank_check() {
         if(document.getElementById("user_id").value == "") {
@@ -25,19 +25,15 @@
                 alert("아이디와 비밀번호가 올바르지 않습니다");
             }
         }
-        
-        
-        
-   function registerSuccess() {
+     
+	function registerSuccess() {
             
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('register_success')) {
                 alert("회원가입이 완료되었습니다!\n 로그인 후 이용해주세요 ^^");
             }
    }
-            
-     
-         
+                    
     window.onload = function() {
     	
             showError();
@@ -45,23 +41,20 @@
         }
         
 	</script>
-
 </head>
 <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #f0f0f0;
-           }   
+	html, body {
+		margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f0f0f0;
+    }   
 </style>
-
 <body>
-
     <div class="login-container">
     <div class="logo-title">
         <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +62,7 @@
 			</svg>
 	<h1>숙명식당</h1>
 	</div>
- <!-- 로고 이미지 -->  
+ 		<!-- 로고 이미지 -->  
         <form name ="loginForm" action="login_verify.jsp" method="post">
         
             <input type="text"  name="user_id" id = "user_id" placeholder="학번(아이디)" required>
@@ -85,13 +78,7 @@
         
         <div style = "text-align: center;">
         <a href="register.jsp">회원가입</a>
-        </div>
-        
-		
-		
-
     </div>
-    
+ 	</div>  
 </body>
-
 </html>

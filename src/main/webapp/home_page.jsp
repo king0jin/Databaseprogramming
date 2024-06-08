@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>숙명식당</title>
+	<title>숙명식당 :: 메인페이지</title>
 </head>
 <body>
 
