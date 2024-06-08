@@ -76,38 +76,38 @@
 <hr>
 <div id="menu-slider" class="menu-slider">
     <div class="menu-item">
-        <img src="img/thebakeAme.jpg" alt="메뉴 1">
+        <img src="images/thebakeAme.jpg" alt="메뉴 1">
         <h3>아메리카노(ice)</h3>
         <p>\2500</p>
         
     </div>
     <div class="menu-item">
-        <img src="img/thebake1.png" alt="메뉴 2">
+        <img src="images/thebake1.png" alt="메뉴 2">
         <h3>카페라떼(ice)</h3>
         <p>\3700</p>
     </div>
     <div class="menu-item">
-        <img src="img/thebake2.jpg" alt="메뉴 3">
+        <img src="images/thebake2.jpg" alt="메뉴 3">
         <h3>솔티버터롤</h3>
         <p>\2500</p>
     </div>
     <div class="menu-item">
-        <img src="img/thebake3.jpg" alt="메뉴 4">
+        <img src="images/thebake3.jpg" alt="메뉴 4">
         <h3>에그타르트</h3>
         <p>\2400</p>
     </div>
     <div class="menu-item">
-        <img src="img/thebake4.png" alt="메뉴 5">
+        <img src="images/thebake4.png" alt="메뉴 5">
         <h3>초코 브라우니 타르트</h3>
         <p>\2700</p>
     </div>
 	<div class="menu-item">
-        <img src="img/thebake6.png" alt="메뉴 6">
+        <img src="images/thebake6.png" alt="메뉴 6">
         <h3>모카번</h3>
         <p>\2600</p>
     </div>
     <div class="menu-item">
-        <img src="img/thebake5.png" alt="메뉴 6">
+        <img src="images/thebake5.png" alt="메뉴 6">
         <h3>밀크 크루아상</h3>
         <p>\1900</p>
     </div>

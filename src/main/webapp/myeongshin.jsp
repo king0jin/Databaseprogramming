@@ -71,38 +71,38 @@
 <div class = mtitle>
 	<div class = rest>명신관 식당</div>
 	<div class = time>명신관B1F 11:00~18:00</div>
-	<button>자세히 보기</button>
+	<button onclick="location.href='MSpage.jsp'">자세히 보기</button>
 </div>
 <hr>
 <div id="menu-slider" class="menu-slider">
     <div class="menu-item">
-        <img src="img/myeong1.png" alt="메뉴 1">
+        <img src="images/myeong1.png" alt="메뉴 1">
         <h3>돈까스</h3>
         <p>\6500</p>
         
     </div>
     <div class="menu-item">
-        <img src="img/myeong2.png" alt="메뉴 2">
+        <img src="images/myeong2.png" alt="메뉴 2">
         <h3>순두부컵밥</h3>
         <p>\3800</p>
     </div>
     <div class="menu-item">
-        <img src="img/myeong3.png" alt="메뉴 3">
+        <img src="images/myeong3.png" alt="메뉴 3">
         <h3>참치마요컵밥</h3>
         <p>\4500</p>
     </div>
     <div class="menu-item">
-        <img src="img/myeong4.jpg" alt="메뉴 4">
+        <img src="images/myeong4.jpg" alt="메뉴 4">
         <h3>쫄면</h3>
         <p>\4500</p>
     </div>
     <div class="menu-item">
-        <img src="img/myeong5.jpg" alt="메뉴 5">
+        <img src="images/myeong5.jpg" alt="메뉴 5">
         <h3>라면</h3>
         <p>\3500</p>
     </div>
     <div class="menu-item">
-        <img src="img/myeongUdong.jpg" alt="메뉴 6">
+        <img src="images/myeongUdong.jpg" alt="메뉴 6">
         <h3>우동</h3>
         <p>\5300</p>
     </div>

@@ -2,10 +2,98 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="CSS/register_style.css">
+    <link rel="stylesheet" type="text/css" href="css/register_style.css">
     <title>숙명식당 회원가입</title>
+    
+    <script>
+
+    function checkUserId() {
+        var userId = document.getElementById("user_id").value;
+        if (userId === "") {
+            document.getElementById("user_id_check").innerText = "아이디를 입력하세요.";
+            return;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "CheckUserIdServlet", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                document.getElementById("user_id_check").innerText = xhr.responseText;
+            }
+        };
+
+        xhr.send("user_id=" + encodeURIComponent(userId));
+    }
+    function checkUserPassword() {
+        var userId = document.getElementById("user_id").value;
+        var userPassword = document.getElementById("user_password").value;
+        if (userPassword === "") {
+            document.getElementById("password_check").innerText = "비밀번호를 입력하세요.";
+            return;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "CheckUserPasswordServlet", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                document.getElementById("password_check").innerText = xhr.responseText;
+            }
+        };
+
+        xhr.send("user_id=" + encodeURIComponent(userId) + "&user_password=" + encodeURIComponent(userPassword));
+    }
+
+    function blank_check() {
+        if (document.getElementById("user_name").value == "") {
+            alert("이름을 입력하세요");
+            return false;
+        }
+        if (document.getElementById("user_id").value == "") {
+            alert("아이디(학번)를 입력하세요");
+            return false;
+        }
+        if (document.getElementById("user_password").value == "") {
+            alert("비밀번호를 입력하세요");
+            return false;
+        }
+
+        var userIdCheckText = document.getElementById("user_id_check").innerText;
+        if (userIdCheckText === "이미 사용 중인 아이디입니다.") {
+            alert("아이디가 중복되었습니다. 다른 아이디를 사용하세요.");
+            return false;
+        }
+        var passwordCheckText = document.getElementById("password_check").innerText;
+        if (passwordCheckText !== "사용 가능한 비밀번호입니다") {
+            alert("비밀번호가 유효하지 않습니다. 다시 확인하세요.");
+            return false;
+        }
+
+      
+    
+
+        return true; // 폼을 제출합니다.
+    }
+
+    function registerErr() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('register_err')) {
+            alert("회원가입 실패...\n 입력내용을 다시 한번 확인해주세요.");
+        }
+    }
+
+    window.onload = function() {
+        registerErr();
+    }
+  
+    </script>
+    
 </head>
 <style>
         .register-container a {
@@ -20,6 +108,8 @@
             margin-top: 15px;
             /* 가운데 정렬 */
         }
+        
+        
         </style>
 
 <body>
@@ -32,21 +122,28 @@
 	<h1>숙명식당</h1>
 	</div>
  <!-- 로고 이미지 -->       
-        <form action="login_verify.jsp" method="post">
+        <form name="registerForm" action="register_user.jsp" method="post" onsubmit="return blank_check();">
             
-            <input type="text" id="name" name="name" placeholder="이름" required>
-            <input type="text" id="studentID" name="studentID" placeholder="학번(아이디)" required>
-            <input type="text" id="username" name="username" placeholder="닉네임" required>
-            <input type="text" id="password" name="password" placeholder="비밀번호" required>
+            <input type="text" id="user_name" name="user_name" placeholder="이름" required>
+            <input type="text" id="user_id" name="user_id" placeholder="학번(아이디)" onkeyup="checkUserId()" required>
+       
+            <span id="user_id_check" style="color: #3D5576; display: inline-block; margin-right: 50px; font-family: 'Noto Sans'; font-size : 12px"></span>
+            
+            <input type="password" id="user_password" name="user_password" placeholder="비밀번호" onkeyup="checkUserPassword()" required>
+            <span id="password_check" style="color: #3D5576; display: inline-block; margin-right: 50px; font-family: 'Noto Sans'; font-size : 12px"></span>
+            <input type="text" id="nickname" name="nickname" placeholder="닉네임(선택)" >
+           
             
 			
 			
-            <button type="submit">회원가입</button>
+            <button type="submit" value = "submit" name ="register">회원가입</button>
             
            
         </form>
         
         <a href="login_page.jsp">이전화면</a> 
+        
+          
         
 	 </div>
 </body>

@@ -1,46 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="CSS/SHpage.css">
+<link rel="stylesheet" type="text/css" href="css/SHpage.css">
 <title>숙명식당 :: 순헌관 식권 구매</title>
 </head>
 <body>
-	<header class="header">
-		<div class="topheader">
-			<div class="logocontainer">
-				<div class="logo">
-					<img src="img/KakaoTalk_20240528_133042390.png" alt="titleLogo" />
-            		<div class="logo-text"><a href="home_page.jsp">숙명식당</a></div>
-				</div>
-        	</div>
-        	<div class="topheadermenu">
-        		<ul class="mypage_cart">
-					<li><a href="mypage.jsp">마이페이지</a></li>
-					<li class="separator"></li>
-					<img class="cartlogo" src="img/cart.png" alt="장바구니로고"/>
-            		<li><a href="cart.jsp">장바구니</a></li> 
-        		</ul>
-        		<hr/>
-        	</div>
-      	</div>
-      	<div class="divider1"></div>
-      	<ul class="mainmenu">
-        	<li><a href="MSpage.jsp">명신관</a></li>
-        	<li><a href="SHpage.jsp">순헌관</a></li>
-        	<li><a href="thebake.jsp">더베이크</a></li>
-      	</ul>
-	</header>
-		
-	<div class="smimg">
-		<img src="img/숙명여대이미지.png">
-	</div>
+<%@include file="bar.jsp" %>
 	
-	<div class="divider2"></div>
+
 	<div class="mainpage">
 		<div class="SH-text">순헌관B1F 11:30 ~ 14:00 | 식권구매 </div>
 		<div class="divider3"></div>
@@ -49,15 +21,15 @@
 			ResultSet rs = null;
 			PreparedStatement pstmt = null;
 			Statement stmt = null;
-			String dburl = "jdbc:oracle:thin:@localhost:1521:xe";
-			String user="db2012133"; 
-			String passwd="ss2";
-			String dbdriver = "oracle.jdbc.driver.OracleDriver";
+		    String dbDriver = "oracle.jdbc.driver.OracleDriver";
+		    String dbURL = "jdbc:oracle:thin:@localhost:1521:xe"; // Update with your DB details
+		    String dbUser = "dbProject"; // Update with your DB username
+		    String dbPasswd = "000828"; // Update with your DB password
             ArrayList<String> koreanMenu = new ArrayList<>();
             ArrayList<String> westernMenu = new ArrayList<>();
             try{
-            	Class.forName(dbdriver);
-            	myConn = DriverManager.getConnection(dburl, user, passwd);
+            	Class.forName(dbDriver);
+            	myConn = DriverManager.getConnection(dbURL, dbUser, dbPasswd);
             	stmt = myConn.createStatement();
             }catch(ClassNotFoundException e){
             	System.out.println("jdbc driver 로딩 실패");
@@ -66,8 +38,8 @@
             }
             
             try {
-                Class.forName("oracle.jdbc.driver.OracleDriver");
-                myConn = DriverManager.getConnection(dburl, user, passwd);
+                Class.forName(dbDriver);
+                myConn = DriverManager.getConnection(dbURL, dbUser, dbPasswd);
 
                 String sql = "SELECT menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8 FROM SHmenu WHERE today = ? AND menucategorie = ?";
                 pstmt = myConn.prepareStatement(sql);
@@ -121,7 +93,7 @@
                 
         %>
 		<span class="buttoncontainer">
-			<button class="SHmenu1">
+			<button class="SHmenu1" onclick="openModal('koreanMealModal')">
 				<div>
 					<div class="menu-items">
 			            <% 
@@ -136,12 +108,12 @@
 			            <p class="price">6,500원</p>
 	        		</div>
 			        <div class="menu-item-add">
-					    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
+					    <img class="menu-item-add-icon" src="images/cart.svg" alt="Cart Icon">
 					    <span class="menu-item-add-text">담기</span>
 					</div>
 				</div>
 			</button>
-			<button class="SHmenu2">
+			<button class="SHmenu2" onclick="openModal('westernMealModal')">
 				<div>
 					<div class="menu-items">
 			            <% 
@@ -156,7 +128,7 @@
 			            <p class="price">6,500원</p>
 	        		</div>
 			        <div class="menu-item-add">
-					    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
+					    <img class="menu-item-add-icon" src="images/cart.svg" alt="Cart Icon">
 					    <span class="menu-item-add-text">담기</span>
 					</div>
 				</div>
@@ -172,13 +144,17 @@
 	        </div>
 	        <div class="quantity">
                 <label for="koreanQuantity">수량 :</label>
-                <input type="number" id="koreanQuantity" name="quantity" value="0" min="0" max="5">
+                <input type="number" id="koreanQuantity" name="quantity" value="1" min="1" max="5">
             </div>
                 
-                <button id="addToCartKorean" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('koreanMealModal')" class="add-to-cart">닫기</button>
-         		
-         </div>
+        <form action="addToCart.jsp" method="post">
+        <input type="hidden" name="cafeteria_code" value="sh">
+        <input type="hidden" name="menu_num" value="201">
+        <input type="hidden" id="koreanCount" name="count" value="1">
+        <button type="submit" id="addToCartKorean" class="add-to-cart">장바구니</button>
+    	</form>
+    	<button onclick="closeModal('koreanMealModal')" class="add-to-cart">닫기</button>
+	</div>
 	
 	    <!-- Western Meal Modal -->
 	    <div id="westernMealModal" class="modal">
@@ -187,14 +163,35 @@
 	            <p>양식 식권</p>
 	        </div>
 	        <div class="quantity">
-                <label for="WesternQuantity">수량 :</label>
-                <input type="number" id="WesternQuantity" name="quantity" value="0" min="0" max="5">
+                <label for="westernQuantity">수량 :</label>
+                <input type="number" id="westernQuantity" name="quantity" value="1" min="1" max="5">
             </div>
                 
-	            <button id="addToCartWestern" class="add-to-cart">장바구니</button>
-	            <button onclick="closeModal('westernMealModal')" class="add-to-cart">닫기</button>
-          		  
-        </div>
+	        <form action="addToCart.jsp" method="post">
+        <input type="hidden" name="cafeteria_code" value="sh">
+        <input type="hidden" name="menu_num" value="202">
+        <input type="hidden" id="westernCount" name="count" value="1">
+        <button type="submit" id="addToCartWestern" class="add-to-cart">장바구니</button>
+    </form>
+    <button onclick="closeModal('westernMealModal')" class="add-to-cart">닫기</button>
+</div>
+<script>
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
+
+    document.getElementById("koreanQuantity").addEventListener("input", function() {
+        document.getElementById("koreanCount").value = this.value;
+    });
+
+    document.getElementById("westernQuantity").addEventListener("input", function() {
+        document.getElementById("westernCount").value = this.value;
+    });
+</script>
 	<script src="javascript/SHpage.js"></script>
 	<script src="javascript/SHmodal.js"></script>
 </body>

@@ -26,7 +26,7 @@
 <table width="100%" align="center" height="100%">
 
 <footer>
-	<p>© 2024 숙명상점. 모든 권리 보유.</p>
+	<p>© 2024 숙명식당. 모든 권리 보유.</p>
 </footer>
 </body>
 </html>

@@ -4,25 +4,28 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%
-    String url = "jdbc:oracle:thin:@localhost:1521:xe";
-    String user = "db2012133";
-    String password = "ss2";
+	String dbDriver = "oracle.jdbc.driver.OracleDriver";
+	String dbURL = "jdbc:oracle:thin:@localhost:1521:xe"; // Update with your DB details
+	String dbUser = "dbProject"; // Update with your DB username
+	String dbPasswd = "000828"; // Update with your DB password
     Connection conn = null;
     Statement stmt = null;
     ResultSet rs = null;
     List<Map<String, String>> menuList = new ArrayList<>();
 
     try {
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-        conn = DriverManager.getConnection(url, user, password);
+        Class.forName(dbDriver);
+        conn = DriverManager.getConnection(dbURL, dbUser, dbPasswd);
         stmt = conn.createStatement();
-        String query = "SELECT * FROM menu";
+        String query = "SELECT menu_num, menu_name, menu_price,imageurl FROM menu where cafeteria_code = 'ms' AND menu_category='양식'";
         rs = stmt.executeQuery(query);
 
         while (rs.next()) {
-            // TODO 명신관 메뉴 받아오기
             Map<String, String> menuItem = new HashMap<>();
-
+            menuItem.put("menu_num", rs.getString("menu_num"));
+            menuItem.put("menu_name", rs.getString("menu_name"));
+            menuItem.put("menu_price", rs.getString("menu_price"));
+            menuItem.put("imageUrl", rs.getString("imageurl"));
             menuList.add(menuItem);
         }
     } catch (Exception e) {
@@ -35,460 +38,105 @@
     request.setAttribute("menuList", menuList);
 %>
 
-<%@ include file="header.jsp" %>
+<%@ include file="bar.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>명신관</title>
-    <link rel="stylesheet" type="text/css" href="CSS/MSpage.css">
+    <link rel="stylesheet" type="text/css" href="css/MSpage.css">
 </head>
+<style>
+.modal {
+	display: none;
+    position: fixed;
+    z-index: 1500; /* 변경된 부분 */
+    top: 50%; /* 수직 중앙 정렬 */
+    left: 40%; /* 수평 중앙 정렬 */  
+    width:300px;  
+    height:400px;  
+	padding:20px;  
+	text-align: center;
+	background-color: rgb(255,255,255); 
+    border-radius:10px; 
+    box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);  
+	transform:translateY(-50%);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+    z-index: 1501;
+}
+</style>
 <body>
 <div class="mainpage">
     <ul class="category">
         <li class="menu-item" id="cupbab" onclick="selectMenu('cupbab')"><a href="MSpage.jsp">컵밥</a></li>
         <li class="menu-item selected" id="western" onclick="selectMenu('western')"><a href="MSpageWestern.jsp">양식</a></li>
         <li class="menu-item" id="special" onclick="selectMenu('special')"><a href="MSpageSpecial.jsp">스페셜메뉴</a></li>
+        <li class="menu-item" id="noodle" onclick="selectMenu('noodle')"><a href="MSpageNoodle.jsp">면류</a></li>
     </ul>
     <div class="menu-container" id="menu-container">
-        <button class="menu-item-card1">
+        <% 
+        	int i = 1;
+            for (Map<String, String> menuItem : menuList) {
+            	String cafeteria_code = menuItem.get("cafeteria_code");
+                String menu_name = menuItem.get("menu_name");
+                String menu_price = menuItem.get("menu_price");
+                String image = menuItem.get("imageUrl");
+                String modalId = "modal" + i;
+                String quantityId = "quantity" + i;
+                String addToCartId = "addToCart" + i;
+                
+        %>
+        <button class="menu-item-card">
             <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image1.png');"></div>
+                <div class="menu-item-image" style="background-image: url('<%= image %>');"></div>
                 <div class="menu-item-divider"></div>
-                <div class="menu-item-name">돈까스</div>
-                <div class="menu-item-price">6,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
+                <div class="menu-item-name"><%= menu_name %></div>
+                <div class="menu-item-price"><%= menu_price %>원</div>
+                <div class="menu-item-add-container" onclick="openModal('<%= modalId %>')">
+                    <img class="menu-item-add-icon" src="images/cart.svg" alt="Cart Icon">
                     <div class="menu-item-add-text">담기</div>
                 </div>
             </div>
         </button>
-        <button class="menu-item-card2">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image2.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">가라아게카레</div>
-                <div class="menu-item-price">6,900원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
+        
+        <div id="<%= modalId %>" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('<%= modalId %>')">&times;</span>
+                <p><%= menu_name %></p>
             </div>
-        </button>
-        <button class="menu-item-card3">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image3.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">소시지카레</div>
-                <div class="menu-item-price">6,900원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card4">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image4.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">우동+미니돈까스</div>
-                <div class="menu-item-price">7,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card5">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image5.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">냉우동+미니돈까스</div>
-                <div class="menu-item-price">7,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card6">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image6.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">쫄면+미니돈까스</div>
-                <div class="menu-item-price">7,000원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card7">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">우동+가라아게(5pc)</div>
-                <div class="menu-item-price">7,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card8">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">쫄면+가라아게(5pc)</div>
-                <div class="menu-item-price">7,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card9">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">냉우동+가라아게(5pc)</div>
-                <div class="menu-item-price">7,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card10">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">일반라면</div>
-                <div class="menu-item-price">3,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card11">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">매운라면</div>
-                <div class="menu-item-price">4,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card12">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">순두부라면</div>
-                <div class="menu-item-price">5,000원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card13">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">얼큰해장라면</div>
-                <div class="menu-item-price">5,000원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card14">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">부대라면</div>
-                <div class="menu-item-price">5,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card15">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">우동</div>
-                <div class="menu-item-price">5,300원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card16">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">냉우동</div>
-                <div class="menu-item-price">5,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card17">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">어묵우동</div>
-                <div class="menu-item-price">6,000원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
-        <button class="menu-item-card18">
-            <div class="menu-item-background">
-                <div class="menu-item-image" style="background-image: url('images/image7.png');"></div>
-                <div class="menu-item-divider"></div>
-                <div class="menu-item-name">쫄면</div>
-                <div class="menu-item-price">4,500원</div>
-                <div class="menu-item-add-container">
-                    <img class="menu-item-add-icon" src="img/cart.svg" alt="Cart Icon">
-                    <div class="menu-item-add-text">담기</div>
-                </div>
-            </div>
-        </button>
+            <div class="quantity">
+                <label for="<%= quantityId %>">수량 :</label>
+                <input type="number" id="<%= quantityId %>" name="quantity" value="1" min="1" max="5">
+            </div>   
+
+       
+       		<form id="form<%= i %>" action="addToCart.jsp" method="post">
+                <input type="hidden" name="cafeteria_code" value="ms">
+                <input type="hidden" name="menu_num" value="<%= menuItem.get("menu_num") %>">
+                <input type="hidden" id="count<%= i %>" name="count" value=1>
+                <button type="submit" id="<%= addToCartId %>" class="add-to-cart" data-name="<%= menu_name %>" data-quantity-id="<%= quantityId %>" data-modal-id="<%= modalId %>" data-form-id="form<%= i %>">장바구니</button>
+            </form>
+            
+            <button onclick="closeModal('<%= modalId %>')" class="add-to-cart">닫기</button>
+        </div>
+        <% 
+                i++;
+            }
+        %>
     </div>
 </div>
-		<div id="western1" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western1')">&times;</span>
-	            <p>돈까스</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western1Quantity">수량 :</label>
-                <input type="number" id="western1Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern1" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western1')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western2" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western2')">&times;</span>
-	            <p>가라아게카레</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western2Quantity">수량 :</label>
-                <input type="number" id="western2Quantity" name="quantity" value="0" min="0" max="5">
-            </div>
-                <button id="addToCartwestern2" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western2')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western3" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western3')">&times;</span>
-	            <p>소시지카레</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western3Quantity">수량 :</label>
-                <input type="number" id="western3Quantity" name="quantity" value="0" min="0" max="5">
-            </div>               
-                <button id="addToCartcubbab3" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western3')" class="add-to-cart">닫기</button>
-         </div>
-         <div id="western4" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western4')">&times;</span>
-	            <p>우동+미니돈까스</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western4Quantity">수량 :</label>
-                <input type="number" id="western4Quantity" name="quantity" value="0" min="0" max="5">
-            </div>               
-                <button id="addToCartwestern4" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western4')" class="add-to-cart">닫기</button>
-         </div>
-         <div id="western5" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western5')">&times;</span>
-	            <p>냉우동+미니돈까스</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western5Quantity">수량 :</label>
-                <input type="number" id="western5Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern1" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western5')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western6" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western6')">&times;</span>
-	            <p>쫄면+미니돈까스</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western6Quantity">수량 :</label>
-                <input type="number" id="western6Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern6" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western6')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western7" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western7')">&times;</span>
-	            <p>우동+가라아게(5pc)</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western7Quantity">수량 :</label>
-                <input type="number" id="western7Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern7" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western7')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western8" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western8')">&times;</span>
-	            <p>쫄면+가라아게(5pc)</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western8Quantity">수량 :</label>
-                <input type="number" id="western8Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern8" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western8')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western9" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western9')">&times;</span>
-	            <p>냉우동+가라아게(5pc)</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western9Quantity">수량 :</label>
-                <input type="number" id="western9Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern9" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western9')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western10" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western10')">&times;</span>
-	            <p>일반라면</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western10Quantity">수량 :</label>
-                <input type="number" id="western10Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern10" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western10')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western11" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western11')">&times;</span>
-	            <p>매운라면</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western11Quantity">수량 :</label>
-                <input type="number" id="western11Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern11" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western11')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western12" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western12')">&times;</span>
-	            <p>순두부라면</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western12Quantity">수량 :</label>
-                <input type="number" id="western12Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern12" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western12')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western13" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western13')">&times;</span>
-	            <p>얼큰해장라면</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western13Quantity">수량 :</label>
-                <input type="number" id="western13Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern13" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western13')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western14" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western14')">&times;</span>
-	            <p>부대라면</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western14Quantity">수량 :</label>
-                <input type="number" id="western14Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern14" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western14')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western15" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western15')">&times;</span>
-	            <p>우동</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western15Quantity">수량 :</label>
-                <input type="number" id="western15Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern15" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western15')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western16" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western16')">&times;</span>
-	            <p>냉우동</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western16Quantity">수량 :</label>
-                <input type="number" id="western16Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern16" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western16')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western17" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western17')">&times;</span>
-	            <p>어묵우동</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western17Quantity">수량 :</label>
-                <input type="number" id="western17Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern17" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western17')" class="add-to-cart">닫기</button>	
-         </div>
-         <div id="western18" class="modal">
-	        <div class="modal-content">
-	            <span class="close" onclick="closeModal('western18')">&times;</span>
-	            <p>쫄면</p>
-	        </div>
-	        <div class="quantity">
-                <label for="western18Quantity">수량 :</label>
-                <input type="number" id="western18Quantity" name="quantity" value="0" min="0" max="5">
-            </div>   
-                <button id="addToCartwestern18" class="add-to-cart">장바구니</button>
-                <button onclick="closeModal('western18')" class="add-to-cart">닫기</button>	
-         </div>
-         <script src="javascript/MSpageWestern.js"></script>
-		 <script src="javascript/MSpageWesternmodal.js"></script>
 
 <script>
+
     function selectMenu(category) {
         var items = document.getElementsByClassName('menu-item');
         for (var i = 0; i < items.length; i++) {
@@ -497,8 +145,32 @@
         document.getElementById(category).classList.add('selected');
     }
 
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         selectMenu('western');
+        
+        var addToCartButtons = document.getElementsByClassName('add-to-cart');
+        for (var i = 0; i < addToCartButtons.length; i++) {
+            addToCartButtons[i].addEventListener('click', function() {
+                var name = this.getAttribute('data-name');
+                var quantityId = this.getAttribute('data-quantity-id');
+                var modalId = this.getAttribute('data-modal-id');
+                var quantity = document.getElementById(quantityId).value;
+                var formId = this.getAttribute('data-form-id');
+                var form = document.getElementById(formId);
+                form.querySelector('input[name="count"]').value = quantity;
+                alert(name + ' ' + quantity + '개가 장바구니에 추가되었습니다.');
+                form.submit();
+                closeModal(modalId);
+            });
+        }
     });
 </script>
 </body>

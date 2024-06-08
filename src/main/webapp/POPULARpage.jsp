@@ -3,9 +3,10 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%
-    String url = "jdbc:oracle:thin:@localhost:1521:xe";
-    String user = "db2012133";
-    String password = "ss2";
+	String dbDriver = "oracle.jdbc.driver.OracleDriver";
+	String dbURL = "jdbc:oracle:thin:@localhost:1521:xe"; // Update with your DB details
+	String dbUser = "dbProject"; // Update with your DB username
+	String dbPasswd = "000828"; // Update with your DB password
     Connection conn = null;
     Statement stmt = null;
     ResultSet rs = null;
@@ -13,7 +14,7 @@
 
     try {
         Class.forName("oracle.jdbc.driver.OracleDriver");
-        conn = DriverManager.getConnection(url, user, password);
+        conn = DriverManager.getConnection(dbURL, dbUser, dbPasswd);
         stmt = conn.createStatement();
         String query = "SELECT * FROM menu";
         rs = stmt.executeQuery(query);
@@ -34,7 +35,7 @@
     request.setAttribute("menuList", menuList);
 %>
 
-<%@ include file="header.jsp" %>
+<%@ include file="bar.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>

@@ -4,8 +4,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="CSS/lost_password_style.css">
+    <link rel="stylesheet" type="text/css" href="css/lost_password_style.css">
 <title>비밀번호 찾기</title>
+
 </head>
 <style>
         html, body {
@@ -17,9 +18,8 @@
             justify-content: center;
             align-items: center;
             background-color: #f0f0f0;
-           }         
-           
-
+           }   
+               
            </style>
 <body>
     <div class="lost_password-container">
@@ -29,20 +29,60 @@
 			</svg>
 	<h1>숙명식당</h1>
 	</div>
-	 <form name ="lost_password" action="login_verify.jsp" method="post">
+        <form id="lost_password_form" name="lost_password" action="PasswordRetrievalServlet" method="post">
 	 
-		<text>
-		</text>
-		<input type="text" id="name" name="name" placeholder="이름" required>
-	    <input type="text" id="studentID" name="studentID" placeholder="학번(아이디)" required>
+		<input type="text" id="user_name" name="user_name" placeholder="이름" required>
+	    <input type="text" id="user_id" name="user_id" placeholder="학번(아이디)" required>
 	    <label>
 	    <button type="submit" NAME="Submit">비밀번호 찾기</button>
 	    </label>
 	    </form>
+
 	    
-	    <label>
 	    <a href="register.jsp">회원가입/</a><a href="login_page.jsp">로그인</a>
-	    </label>
+	     
+	    
+       
 	</div>
+    <script>
+        window.onload = function() {
+            document.getElementById('lost_password_form').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);
+
+                // 폼 데이터 출력
+                for (var pair of formData.entries()) {
+                    console.log(pair[0]+ ': ' + pair[1]);
+                }
+
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', 'PasswordRetrievalServlet', true);
+
+                xhr.onload = function () {
+                    console.log("XHR Status:", xhr.status);
+                    console.log("Response Text:", xhr.responseText);
+
+                    if (xhr.status === 200) {
+                        alert(xhr.responseText);
+                    } else {
+                        alert('비밀번호를 찾는 도중 오류가 발생했습니다.');
+                    }
+                };
+
+                xhr.onerror = function () {
+                    alert('비밀번호를 찾는 도중 오류가 발생했습니다.');
+                };
+
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                
+                // 폼 데이터를 URL 인코딩 방식으로 변환
+                const encodedData = new URLSearchParams(formData).toString();
+                console.log("Encoded Data: " + encodedData);
+
+                xhr.send(encodedData);
+            });
+        };
+    </script>
 </body>
 </html>

@@ -92,12 +92,12 @@
 <div class = stitle>
 	<div class = rest>순헌관 식당</div>
 	<div class = time>순헌관B1F 11:30~14:00</div>
-	<button>자세히 보기</button>
+	<button onclick="location.href='SHpage.jsp'">자세히 보기</button>
 </div>
 <hr>
   <div class="smenu-container">
     <div class="smenu-item">
-        <img src="img/sun1.png" alt="메뉴 1">
+        <img src="images/sun1.png" alt="메뉴 1">
         <div class="smenu-text">
             <h3>한식</h3>
             <p>모듬햄부대찌개</p>
@@ -111,7 +111,7 @@
         </div>
     </div>
     <div class="smenu-item">
-        <img src="img/sun2.png" alt="메뉴 2">
+        <img src="images/sun2.png" alt="메뉴 2">
         <div class="smenu-text">
             <h3>양식</h3>
             <p>난자완스덮밥</p>
