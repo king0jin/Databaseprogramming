@@ -116,7 +116,7 @@
                 xhr.send('action=deleteItems&menuNums=' + menuNums.join(','));
             }
         }
-        
+
         function getSelectedMenuDetails() {
             var selectedItems = document.querySelectorAll('.item-checkbox:checked');
             var menuDetails = [];
@@ -126,6 +126,23 @@
                 menuDetails.push(id + ':' + quantity);
             });
             return menuDetails.join(',');
+        }
+
+        function toggleSelectAll() {
+            var selectAllCheckbox = document.getElementById('toggleSelectAllCheckbox');
+            var checkboxes = document.querySelectorAll('.item-checkbox');
+            var isChecked = selectAllCheckbox.checked;
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = isChecked;
+            });
+            updateTotal();
+        }
+
+        function updateSelectAllCheckbox() {
+            var selectAllCheckbox = document.getElementById('toggleSelectAllCheckbox');
+            var checkboxes = document.querySelectorAll('.item-checkbox');
+            var allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+            selectAllCheckbox.checked = allChecked;
         }
 
         window.onload = function() {
@@ -143,138 +160,132 @@
             var checkboxes = document.getElementsByClassName('item-checkbox');
             for (var i = 0; i < checkboxes.length; i++) {
                 checkboxes[i].checked = true;
-                checkboxes[i].addEventListener('change', updateTotal);
+                checkboxes[i].addEventListener('change', function() {
+                    updateTotal();
+                    updateSelectAllCheckbox();
+                });
             }
             updateTotal();
         }
     </script>
 </head>
 <body>
-	<div class="container">
-	    <h1>장바구니</h1>
-	    <%
-	     List<Map<String, Object>> cartItems = (List<Map<String, Object>>) request.getAttribute("cartItems");
-	     boolean isEmptyCart = (cartItems == null || cartItems.isEmpty());
-	     if (!isEmptyCart) {
-	    %>
-	    <div style="text-align: left; display: flex; align-items: center; margin-bottom: 20px;">
-	        <div style="display: flex; align-items: center;">
-	            <input type="checkbox" id="toggleSelectAllCheckbox" onclick="toggleSelectAll()" checked style="transform: scale(1.5);">
-	            <label for="toggleSelectAllCheckbox" style="margin-left: 5px; cursor: pointer;">전체선택</label>
-	            <span style="margin: 0 10px;">|</span>
-	            <span onclick="deleteItems()" style="cursor: pointer; text-decoration: underline; font-size: 16px;">선택삭제</span>
-	        </div>
-	    </div>
-	    <%
-	        }
-	    %>
-	    <div class="item-divider"></div>
-	    <%
-	        Map<String, List<Map<String, Object>>> categorizedItems = new HashMap<>();
-	        categorizedItems.put("ms", new ArrayList<>());
-	        categorizedItems.put("sh", new ArrayList<>());
-	        categorizedItems.put("tb", new ArrayList<>());
-	
-	        if (cartItems != null) {
-	            for (Map<String, Object> item : cartItems) {
-	                String cafeteriaCode = (String) item.get("cafeteriaCode");
-	                if (categorizedItems.containsKey(cafeteriaCode)) {
-	                    categorizedItems.get(cafeteriaCode).add(item);
-	                }
-	            }
-	        }
-	
-	        String[] cafeteriaCodes = { "ms", "sh", "tb" };
-	        String[] cafeteriaNames = { "명신관", "순헌관", "더베이크" };
-	        
-	        boolean isFirstSection = true;
-	        for (int i = 0; i < cafeteriaCodes.length; i++) {
-	            String code = cafeteriaCodes[i];
-	            String name = cafeteriaNames[i];
-	            List<Map<String, Object>> items = categorizedItems.get(code);
-	            if (items != null && !items.isEmpty()) {
-	            	if (!isFirstSection) { 
-	    %>
-	    <div class="item-divider"></div>
-	    <% 
-	    	}
-	        isFirstSection = false;     	
-	    %>
-	    <div class="cart-section">
-	        <div class="item-header"><%= name %></div>
-	        <%
-	            for (int j = 0; j < items.size(); j++) {
-	                Map<String, Object> item = items.get(j);
-	                int price = (int) item.get("price");
-	                int count = (int) item.get("count");
-	        %>
-	        <div class="cart-item">
-	            <div class="item-info">
-	                <input type="checkbox" class="item-checkbox" value="<%= item.get("menuNum") %>" style="margin-right: 20px;">
-	                <div class="item-image">
-	                    <img src="images/image_yet.png" alt="메뉴 이미지">
-	                </div>
-	                <div class="item-details">
-	                    <p class="item-name"><%= item.get("menuName") %></p>
-	                    <p class="item-price" id="price-<%= item.get("menuNum") %>" data-price="<%= price %>"><%= String.format("%,d원", price) %></p>
-	                </div>
-	                <div class="item-quantity" style="position: absolute; right: 120px;">
-	                    <div class="quantity-control">
-	                        <img id="minus-<%= item.get("menuNum") %>" class="minus-button" src="images/minus2.svg" alt="minus" onclick="decreaseQuantity(<%= item.get("menuNum") %>)">
-	                        <div id="quantity-<%= item.get("menuNum") %>" class="quantity-number"><%= count %></div>
-	                        <img class="plus-button" src="images/plus.svg" alt="plus" onclick="increaseQuantity(<%= item.get("menuNum") %>)">
-	                    </div>
-	                </div>
-	                <div class="item-total-price" style="position: absolute; right: 20px;" id="total-price-<%= item.get("menuNum") %>"><%= String.format("%,d원", price * count) %></div>
-	            </div>
-	            <% if (j < items.size() - 1) { %>
-	            <div class="item-divider-gray"></div>
-	            <% } %>
-	        </div>
-	        <%
-	            }
-	        %>
-	    </div>
-	    <%
-	            }
-	        }
-	        if (isEmptyCart) {
-	            %>
-	            <p style="text-align: center; margin-top: 60px;">장바구니에 담긴 상품이 없습니다.</p>
-	            <div class="total">
-	            </div>
-	            <%
-	            } else {
-	            %>
-	            <div class="item-divider"></div>
-	            <form action="submitOrder.jsp" method="POST" onsubmit="document.getElementById('selectedMenuDetails').value = getSelectedMenuDetails();">
-	            <input type="hidden" id="selectedMenuDetails" name="selectedMenuDetails" value="">
-	            <%
-	                int totalPrice = 0;
-	                for (Map<String, Object> item : cartItems) {
-	                    totalPrice += (int) item.get("price") * (int) item.get("count");
-	                }
-	            %>
-	            <div class="total">
-	                <p>합계</p>
-	                <p id="total-price" class="total-price"><%= String.format("%,d원", totalPrice) %></p>
-	            </div>
-	            <div class="order-button" style="margin-bottom: 20px;">
-	                <button type="submit">주문하기</button>
-	            </div>
-	            </form>
-	            <%
-	                }
-	            %>
-	</div>
-	<script>
-	    function toggleSelectAll() {
-	        var checkboxes = document.querySelectorAll('.item-checkbox');
-	        var allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
-	        checkboxes.forEach(checkbox => {
-	            checkbox.checked = !allChecked;
-	        });
-	    }
-	</script>
+<div class="container">
+    <h1>장바구니</h1>
+    <%
+        List<Map<String, Object>> cartItems = (List<Map<String, Object>>) request.getAttribute("cartItems");
+        boolean isEmptyCart = (cartItems == null || cartItems.isEmpty());
+        if (!isEmptyCart) {
+    %>
+    <div style="text-align: left; display: flex; align-items: center; margin-bottom: 20px;">
+        <div style="display: flex; align-items: center;">
+            <input type="checkbox" id="toggleSelectAllCheckbox" onclick="toggleSelectAll()" checked style="transform: scale(1.5);">
+            <label for="toggleSelectAllCheckbox" style="margin-left: 5px; cursor: pointer;">전체선택</label>
+            <span style="margin: 0 10px;">|</span>
+            <span onclick="deleteItems()" style="cursor: pointer; text-decoration: underline; font-size: 16px;">선택삭제</span>
+        </div>
+    </div>
+    <%
+        }
+    %>
+    <div class="item-divider"></div>
+    <%
+
+        Map<String, List<Map<String, Object>>> categorizedItems = new HashMap<>();
+        categorizedItems.put("ms", new ArrayList<>());
+        categorizedItems.put("sh", new ArrayList<>());
+        categorizedItems.put("tb", new ArrayList<>());
+
+        if (cartItems != null) {
+            for (Map<String, Object> item : cartItems) {
+                String cafeteriaCode = (String) item.get("cafeteriaCode");
+                if (categorizedItems.containsKey(cafeteriaCode)) {
+                    categorizedItems.get(cafeteriaCode).add(item);
+                }
+            }
+        }
+
+        String[] cafeteriaCodes = { "ms", "sh", "tb" };
+        String[] cafeteriaNames = { "명신관", "순헌관", "더베이크" };
+
+        boolean isFirstSection = true;
+        for (int i = 0; i < cafeteriaCodes.length; i++) {
+            String code = cafeteriaCodes[i];
+            String name = cafeteriaNames[i];
+            List<Map<String, Object>> items = categorizedItems.get(code);
+            if (items != null && !items.isEmpty()) {
+                if (!isFirstSection) { %>
+    <div class="item-divider"></div>
+    <% }
+        isFirstSection = false;
+    %>
+    <div class="cart-section">
+        <div class="item-header"><%= name %></div>
+        <%
+            for (int j = 0; j < items.size(); j++) {
+                Map<String, Object> item = items.get(j);
+                int price = (int) item.get("price");
+                int count = (int) item.get("count");
+        %>
+        <div class="cart-item">
+            <div class="item-info">
+                <input type="checkbox" class="item-checkbox" value="<%= item.get("menuNum") %>" style="margin-right: 20px;">
+                <div class="item-image">
+                    <img src="images/image_yet.png" alt="메뉴 이미지">
+                </div>
+                <div class="item-details">
+                    <p class="item-name"><%= item.get("menuName") %></p>
+                    <p class="item-price" id="price-<%= item.get("menuNum") %>" data-price="<%= price %>"><%= String.format("%,d원", price) %></p>
+                </div>
+                <div class="item-quantity" style="position: absolute; right: 120px;">
+                    <div class="quantity-control">
+                        <img id="minus-<%= item.get("menuNum") %>" class="minus-button" src="images/minus2.svg" alt="minus" onclick="decreaseQuantity(<%= item.get("menuNum") %>)">
+                        <div id="quantity-<%= item.get("menuNum") %>" class="quantity-number"><%= count %></div>
+                        <img class="plus-button" src="images/plus.svg" alt="plus" onclick="increaseQuantity(<%= item.get("menuNum") %>)">
+                    </div>
+                </div>
+                <div class="item-total-price" style="position: absolute; right: 20px;" id="total-price-<%= item.get("menuNum") %>"><%= String.format("%,d원", price * count) %></div>
+            </div>
+            <% if (j < items.size() - 1) { %>
+            <div class="item-divider-gray"></div>
+            <% } %>
+        </div>
+        <%
+            }
+        %>
+    </div>
+    <%
+            }
+        }
+
+        if (isEmptyCart) {
+    %>
+    <p style="text-align: center; margin-top: 60px;">장바구니에 담긴 상품이 없습니다.</p>
+    <div class="total">
+    </div>
+    <%
+    } else {
+    %>
+    <div class="item-divider"></div>
+    <form action="submitOrder.jsp" method="POST" onsubmit="document.getElementById('selectedMenuDetails').value = getSelectedMenuDetails();">
+        <input type="hidden" id="selectedMenuDetails" name="selectedMenuDetails" value="">
+        <%
+            int totalPrice = 0;
+            for (Map<String, Object> item : cartItems) {
+                totalPrice += (int) item.get("price") * (int) item.get("count");
+            }
+        %>
+        <div class="total">
+            <p>합계</p>
+            <p id="total-price" class="total-price"><%= String.format("%,d원", totalPrice) %></p>
+        </div>
+        <div class="order-button" style="margin-bottom: 20px;">
+            <button type="submit">주문하기</button>
+        </div>
+    </form>
+    <%
+        }
+    %>
+</div>
 </body>
 </html>
