@@ -41,11 +41,11 @@
                 Class.forName(dbDriver);
                 myConn = DriverManager.getConnection(dbURL, dbUser, dbPasswd);
 
-                String sql = "SELECT menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8 FROM SHmenu WHERE today = ? AND menucategorie = ?";
+                String sql = "SELECT menu1, menu2, menu3, menu4, menu5, menu6, menu7, menu8 FROM SHmenu WHERE today = ? AND menu_num = ?";
                 pstmt = myConn.prepareStatement(sql);
              	// Fetch Korean menu
                 pstmt.setString(1, "2024-05-30");
-                pstmt.setString(2, "한식");
+                pstmt.setString(2, "201");
                 rs = pstmt.executeQuery();
                 if (rs.next()) {
                     koreanMenu.add(rs.getString("menu1"));
@@ -63,7 +63,7 @@
              	// Fetch Western menu
                 pstmt = myConn.prepareStatement(sql);
                 pstmt.setString(1, "2024-05-30");
-                pstmt.setString(2, "양식");
+                pstmt.setString(2, "202");
                 rs = pstmt.executeQuery();
                 if (rs.next()) {
                     westernMenu.add(rs.getString("menu1"));

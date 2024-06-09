@@ -87,6 +87,20 @@
 	        }
 	        document.getElementById(category).classList.add('selected');
 	    }
+	    
+	    function checkTimeAndOpenModal(modalId) {
+	        const now = new Date();
+	        const startTime = new Date();
+	        startTime.setHours(11, 30, 0); // 11:30 AM
+	        const endTime = new Date();
+	        endTime.setHours(14, 0, 0); // 2:00 PM
+
+	        if (now >= startTime && now <= endTime) {
+	            openModal(modalId);
+	        } else {
+	            alert("해당 시간이 아닙니다");
+	        }
+	    }
 	
 	    document.addEventListener('DOMContentLoaded', function() {
 	        selectMenu('cake');
