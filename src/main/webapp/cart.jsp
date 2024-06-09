@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>숙명식당 :: 장바구니</title>
-    <link rel="stylesheet" type="text/css" href="css/cart.css?after">
+    <link rel="stylesheet" type="text/css" href="css/cart.css">
     <style>
         .item-divider {
             border-top: 1px solid #ccc;
