@@ -156,7 +156,7 @@
         let endTime = new Date();
 
         if (dayOfWeek >= 1 && dayOfWeek <= 5) { // 월요일 ~ 금요일
-            startTime.setHours(11, 0, 0); // 11:00 AM
+            startTime.setHours(10, 0, 0); // 10:00 AM
             endTime.setHours(18, 0, 0); // 18:00 PM
         } else { // 토요일 및 일요일
             alert("정기 휴무입니다");
