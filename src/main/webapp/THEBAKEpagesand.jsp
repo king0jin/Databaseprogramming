@@ -150,9 +150,9 @@
     function checkTimeAndOpenModal(modalId) {
         const now = new Date();
         const startTime = new Date();
-        startTime.setHours(11, 30, 0); // 11:30 AM
+        startTime.setHours(8, 0, 0); // 8:00 AM
         const endTime = new Date();
-        endTime.setHours(14, 0, 0); // 2:00 PM
+        endTime.setHours(20, 0, 0); // 20:00 PM
 
         if (now >= startTime && now <= endTime) {
             openModal(modalId);
