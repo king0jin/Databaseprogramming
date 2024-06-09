@@ -90,10 +90,20 @@
 	    
 	    function checkTimeAndOpenModal(modalId) {
 	        const now = new Date();
-	        const startTime = new Date();
-	        startTime.setHours(8, 0, 0); // 8:00 AM
-	        const endTime = new Date();
-	        endTime.setHours(20, 0, 0); // 20:00 PM
+	        const dayOfWeek = now.getDay(); // 일요일: 0, 월요일: 1, ..., 토요일: 6
+	        let startTime = new Date();
+	        let endTime = new Date();
+
+	        if (dayOfWeek >= 1 && dayOfWeek <= 5) { // 월요일 ~ 금요일
+	            startTime.setHours(8, 0, 0); // 8:00 AM
+	            endTime.setHours(20, 0, 0); // 8:00 PM
+	        } else if (dayOfWeek === 6) { // 토요일
+	            startTime.setHours(9, 0, 0); // 9:00 AM
+	            endTime.setHours(19, 0, 0); // 7:00 PM
+	        } else { // 일요일
+	            alert("정기 휴무입니다");
+	            return;
+	        }
 
 	        if (now >= startTime && now <= endTime) {
 	            openModal(modalId);
